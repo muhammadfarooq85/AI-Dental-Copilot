@@ -17,12 +17,6 @@ export default function ReportScreen() {
   const reportSummary =
     "Based on the analysis of your oral health inputs, we’ve detected minor risk factors. We recommend consulting a dental professional for a detailed checkup.";
 
-  const stats = [
-    { label: "Swelling", value: "Increased", trend: "up" },
-    { label: "Pain", value: "Stable", trend: "down" },
-    { label: "Sores", value: "Mild", trend: "up" },
-    { label: "Lining", value: "Normal", trend: "down" },
-  ];
   const router = useRouter();
 
   return (
@@ -43,27 +37,6 @@ export default function ReportScreen() {
       >
         <Text style={styles.cardTitle}>Summary</Text>
         <Text style={styles.cardText}>{reportSummary}</Text>
-      </Animatable.View>
-      <Animatable.View
-        animation="fadeInUp"
-        delay={400}
-        duration={1000}
-        style={styles.card}
-      >
-        <Text style={styles.cardTitle}>Stats Overview</Text>
-        <View style={styles.grid}>
-          {stats.map((stat, index) => (
-            <View key={index} style={styles.statBox}>
-              <Ionicons
-                name={stat.trend === "up" ? "arrow-up" : "arrow-down"}
-                size={22}
-                color={stat.trend === "up" ? "#ff6b6b" : "#00BFA6"}
-              />
-              <Text style={styles.statLabel}>{stat.label}</Text>
-              <Text style={styles.statValue}>{stat.value}</Text>
-            </View>
-          ))}
-        </View>
       </Animatable.View>
       <Animatable.View
         animation="fadeInUp"
@@ -106,14 +79,15 @@ export default function ReportScreen() {
           style={styles.button}
           onPress={() => router.navigate("/details")}
         >
-          <Ionicons name="refresh" size={20} color="#fff" />
-          <Text style={styles.buttonText}>Regenerate</Text>
+          <Text style={styles.buttonText}>Download</Text>
+          <Ionicons name="download" size={20} color="#fff" />
         </TouchableOpacity>
       </Animatable.View>
     </ScrollView>
   );
 }
 
+// Styling
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -125,8 +99,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "700",
+    fontSize: 30,
+    fontFamily: "SpaceGrotesk-Medium",
     color: "#fff",
     marginBottom: 12,
     textAlign: "center",
@@ -146,39 +120,21 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255,255,255,0.1)",
   },
   cardTitle: {
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 25,
     color: "#fff",
     marginBottom: 12,
   },
   cardText: {
-    fontSize: 15,
+    fontSize: 17,
     color: "rgba(255,255,255,0.8)",
-    lineHeight: 22,
+    lineHeight: 20,
+    fontFamily: "SpaceGrotesk-Medium",
+    letterSpacing: 0.5,
   },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-  },
-  statBox: {
-    width: "48%",
-    backgroundColor: "rgba(255,255,255,0.07)",
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    alignItems: "center",
-  },
-  statLabel: {
-    color: "#ccc",
-    fontSize: 14,
-    marginTop: 8,
-  },
-  statValue: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#fff",
-    marginTop: 4,
   },
   doctorBox: {
     flexDirection: "row",
@@ -188,14 +144,14 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255,255,255,0.1)",
   },
   doctorName: {
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 17,
+    fontFamily: "SpaceGrotesk-Medium",
     color: "#fff",
     marginBottom: 2,
   },
   doctorAddress: {
     fontSize: 13,
-    color: "rgba(255,255,255,0.7)",
+    color: "rgba(255,255,255,0.8)",
     marginLeft: 4,
   },
   buttonRow: {
@@ -216,7 +172,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "600",
-    marginLeft: 6,
+    fontSize: 25,
+    fontFamily: "SpaceGrotesk-Medium",
+    marginRight: 8,
   },
   secondaryBtn: {
     backgroundColor: "transparent",
@@ -225,7 +183,8 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     color: "#00BFA6",
-    fontWeight: "600",
-    marginLeft: 6,
+    fontSize: 25,
+    fontFamily: "SpaceGrotesk-Medium",
+    marginLeft: 8,
   },
 });

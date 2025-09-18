@@ -1,4 +1,4 @@
-// Libraries Imorts
+// Libraries Imports
 import { useRouter } from "expo-router";
 import {
   ScrollView,
@@ -21,34 +21,21 @@ export default function AboutScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Animatable.View
           animation="fadeInDown"
-          duration={1000}
+          duration={900}
           style={styles.header}
         >
           <Text style={styles.title}>About AI Dental Copilot</Text>
           <View style={styles.divider} />
         </Animatable.View>
-        <Animatable.View
-          animation="fadeInUp"
-          duration={1000}
-          delay={300}
-          style={styles.contentBox}
-        >
+        <View style={styles.contentBox}>
           <Text style={styles.sectionTitle}>What We Do</Text>
           <Text style={styles.description}>
-            AI Dental Copilot is an innovative application that uses artificial
-            intelligence to help you monitor your dental health. Our advanced
-            algorithms can analyze dental images and provide insights about
-            potential issues, helping you take better care of your smile.
+            AI Dental Copilot helps you monitor dental health using AI-driven
+            image analysis, offering early insights so you can take better care
+            of your smile.
           </Text>
-        </Animatable.View>
-
-        {/* How To Use */}
-        <Animatable.View
-          animation="fadeInUp"
-          duration={1000}
-          delay={500}
-          style={styles.contentBox}
-        >
+        </View>
+        <View style={styles.contentBox}>
           <Text style={styles.sectionTitle}>How To Use</Text>
           {howToUse.map((step) => (
             <View style={styles.stepContainer} key={step.num}>
@@ -61,43 +48,20 @@ export default function AboutScreen() {
               </View>
             </View>
           ))}
-        </Animatable.View>
-        <Animatable.View
-          animation="fadeInUp"
-          duration={1000}
-          delay={700}
-          style={styles.contentBox}
-        >
+        </View>
+        <View style={styles.contentBox}>
           <Text style={styles.sectionTitle}>Meet Our Team</Text>
-          <Text style={styles.description}>
-            Our dedicated team of professionals combines expertise in dentistry,
-            artificial intelligence, and user experience to deliver the best
-            dental health solutions.
-          </Text>
-
-          <View style={styles.teamGrid}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {teamMembers.map((member) => (
               <View key={member.id} style={styles.teamMember}>
                 <Image source={{ uri: member.image }} style={styles.avatar} />
                 <Text style={styles.memberName}>{member.name}</Text>
-                <Text style={styles.memberRole}>{member.role}</Text>
               </View>
             ))}
-          </View>
-        </Animatable.View>
-        <Animatable.View
-          animation="fadeInUp"
-          duration={1000}
-          delay={900}
-          style={styles.contentBox}
-        >
+          </ScrollView>
+        </View>
+        <View style={styles.contentBox}>
           <Text style={styles.sectionTitle}>Our Technology</Text>
-          <Text style={styles.description}>
-            Using cutting-edge machine learning algorithms trained on thousands
-            of dental images, our AI provides accurate preliminary assessments
-            to help you understand your dental health better.
-          </Text>
-
           <View style={styles.featureList}>
             {ourTechnology.map((feature, index) => (
               <View key={index} style={styles.featureItem}>
@@ -106,12 +70,12 @@ export default function AboutScreen() {
               </View>
             ))}
           </View>
-        </Animatable.View>
+        </View>
       </ScrollView>
       <Animatable.View
         animation="fadeInUp"
         duration={1000}
-        delay={1100}
+        delay={600}
         style={styles.buttonContainer}
       >
         <TouchableOpacity
@@ -119,161 +83,148 @@ export default function AboutScreen() {
           onPress={() => router.navigate("./details")}
           activeOpacity={0.85}
         >
-          <Ionicons name="document-text" size={22} color="#fff" />
           <Text style={styles.buttonText}>Fill Your Details</Text>
+          <Ionicons name="document-text" size={22} color="#fff" />
         </TouchableOpacity>
       </Animatable.View>
     </View>
   );
 }
 
+// Styling
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0d0d0d",
   },
   scrollContent: {
-    padding: 24,
-    paddingBottom: 120,
+    padding: 20,
+    paddingBottom: 80,
   },
   header: {
     alignItems: "center",
-    marginBottom: 36,
-    marginTop: 24,
+    marginBottom: 28,
+    marginTop: 20,
   },
   title: {
     fontSize: 30,
-    fontWeight: "800",
-    color: "#ffffff",
-    marginBottom: 18,
+    color: "#fff",
+    marginBottom: 12,
     textAlign: "center",
-    letterSpacing: 0.5,
+    fontFamily: "SpaceGrotesk-Medium",
   },
   divider: {
     height: 3,
-    width: 80,
+    width: 70,
     backgroundColor: "#00BFA6",
     borderRadius: 2,
   },
   contentBox: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderRadius: 18,
-    padding: 22,
-    marginBottom: 28,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 22,
   },
   sectionTitle: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#ffffff",
-    marginBottom: 14,
+    fontSize: 25,
+    color: "#fff",
+    marginBottom: 12,
+    fontFamily: "SpaceGrotesk-Medium",
   },
   description: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.85)",
-    lineHeight: 24,
-    marginBottom: 12,
+    fontFamily: "SpaceGrotesk-Medium",
+    fontSize: 17,
+    color: "rgba(255,255,255,0.8)",
+    lineHeight: 20,
+    letterSpacing: 0.5,
   },
   stepContainer: {
     flexDirection: "row",
-    marginBottom: 22,
+    marginBottom: 18,
     alignItems: "flex-start",
   },
   stepNumber: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: "rgba(0, 191, 166, 0.18)",
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "rgba(0,191,166,0.18)",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 16,
-    marginTop: 2,
+    marginRight: 14,
   },
   stepText: {
     color: "#00BFA6",
-    fontWeight: "700",
-    fontSize: 16,
+    fontFamily: "SpaceGrotesk-Medium",
+    fontSize: 15,
   },
   stepContent: {
     flex: 1,
   },
   stepTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#ffffff",
-    marginBottom: 6,
+    fontFamily: "SpaceGrotesk-Medium",
+    fontSize: 20,
+    color: "#ffffffe4",
+    marginBottom: 4,
+    letterSpacing: 0.5,
   },
   stepDescription: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.7)",
-    lineHeight: 21,
-  },
-  teamGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginTop: 18,
+    fontSize: 15,
+    color: "rgba(255,255,255,0.8)",
+    lineHeight: 20,
+    letterSpacing: 0.5,
   },
   teamMember: {
-    width: "47%",
+    width: 120,
     alignItems: "center",
-    marginBottom: 22,
-    backgroundColor: "rgba(255, 255, 255, 0.06)",
-    borderRadius: 14,
-    padding: 14,
+    marginRight: 16,
+    backgroundColor: "rgba(255,255,255,0.05)",
+    borderRadius: 12,
+    padding: 12,
   },
   avatar: {
-    width: 84,
-    height: 84,
-    borderRadius: 42,
-    marginBottom: 12,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    marginBottom: 10,
   },
   memberName: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#ffffff",
-    textAlign: "center",
-    marginBottom: 4,
-  },
-  memberRole: {
-    fontSize: 13,
-    color: "rgba(255, 255, 255, 0.7)",
+    fontSize: 15,
+    fontFamily: "SpaceGrotesk-Medium",
+    color: "#fff",
     textAlign: "center",
   },
   featureList: {
-    marginTop: 18,
+    marginTop: 12,
   },
   featureItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 10,
   },
   featureText: {
-    fontSize: 15,
-    color: "rgba(255, 255, 255, 0.85)",
-    marginLeft: 10,
+    fontSize: 17,
+    color: "rgba(255,255,255,0.85)",
+    marginLeft: 8,
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 30,
+    bottom: 25,
     left: 20,
     right: 20,
   },
   button: {
     backgroundColor: "#00BFA6",
-    borderRadius: 24,
-    paddingVertical: 16,
+    borderRadius: 20,
+    paddingVertical: 14,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    elevation: 6,
+    elevation: 4,
   },
   buttonText: {
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: "700",
-    letterSpacing: 0.4,
-    marginLeft: 8,
+    color: "#fff",
+    fontSize: 25,
+    fontFamily: "SpaceGrotesk-Medium",
+    marginRight: 8,
   },
 });

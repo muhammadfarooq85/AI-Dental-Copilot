@@ -116,16 +116,16 @@ export default function DetailsScreen() {
               ) : (
                 <Ionicons name="image" size={40} color="#00BFA6" />
               )}
-            </TouchableOpacity>
             {touched.image && errors.image && (
               <Text style={styles.error}>{errors.image}</Text>
             )}
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
               onPress={() => handleSubmit()}
             >
-              <Ionicons name="send" size={22} color="#fff" />
               <Text style={styles.buttonText}>Submit Details</Text>
+              <Ionicons name="send" size={22} color="#fff" />
             </TouchableOpacity>
           </>
         )}
@@ -134,7 +134,7 @@ export default function DetailsScreen() {
   );
 }
 
-// Styles
+// Styling
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -147,12 +147,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "#ffffff",
+    fontSize: 30,
+    color: "#fff",
+    fontFamily: "SpaceGrotesk-Medium",
     marginBottom: 28,
     textAlign: "center",
-    letterSpacing: 0.5,
   },
   divider: {
     height: 3,
@@ -164,9 +163,10 @@ const styles = StyleSheet.create({
     marginBottom: 28,
   },
   label: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#e0e0e0",
+    fontSize: 20,
+    color: "#fff",
+    marginRight: 8,
+    fontFamily: "SpaceGrotesk-Medium",
     marginBottom: 12,
     lineHeight: 22,
   },
@@ -188,13 +188,13 @@ const styles = StyleSheet.create({
     borderColor: "#00BFA6",
   },
   optionText: {
-    fontSize: 15,
+    fontSize: 17,
     color: "#b3b3b3",
-    fontWeight: "500",
+    fontFamily: "SpaceGrotesk-Medium",
   },
   selectedText: {
     color: "#fff",
-    fontWeight: "700",
+    fontFamily: "SpaceGrotesk-Medium",
   },
   imagePicker: {
     height: 140,
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 12,
-    marginBottom: 28,
+    marginBottom: 20,
   },
   image: {
     height: "100%",
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   error: {
-    fontSize: 13,
-    color: "#ff6b6b",
+    fontSize: 15,
+    color: "#E63946",
     marginTop: 6,
   },
   button: {
@@ -229,9 +229,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 18,
-    fontWeight: "700",
-    letterSpacing: 0.3,
-    marginLeft: 8,
+    marginRight: 8,
+    fontSize: 25,
+    fontFamily: "SpaceGrotesk-Medium",
   },
 });

@@ -2,35 +2,38 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: "https://plus.unsplash.com/premium_photo-1676333345832-d2901e1b5a8c?w=800&auto=format&fit=crop&q=80",
-        }}
-        style={styles.background}
-      />
-      <View style={styles.bottomCard}>
-        <Text style={styles.title}>AI Dental Copilot</Text>
-        <Text style={styles.subtitle}>
-          Your intelligent assistant for dental health and care.
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("./about")}
-          activeOpacity={0.85}
-        >
-          <View style={styles.buttonSolid}>
-            <Text style={styles.buttonText}>Get Started</Text>
-            <Ionicons name="arrow-forward" size={22} color="#fff" />
-          </View>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+      <View style={styles.innerContainer}>
+        <Image
+          source={{
+            uri: "https://plus.unsplash.com/premium_photo-1676333345832-d2901e1b5a8c?w=800&auto=format&fit=crop&q=80",
+          }}
+          style={styles.background}
+        />
+        <View style={styles.bottomCard}>
+          <Text style={styles.title}>AI Dental Copilot</Text>
+          <Text style={styles.subtitle}>
+            Your intelligent assistant for dental health and care.
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push("./about")}
+            activeOpacity={0.85}
+          >
+            <View style={styles.buttonSolid}>
+              <Text style={styles.buttonText}>Get Started</Text>
+              <Ionicons name="arrow-forward" size={22} color="#fff" />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -38,18 +41,21 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111",
+    backgroundColor: "#0d0d0d",
+  },
+  innerContainer: {
+    flex: 1,
   },
   background: {
     ...StyleSheet.absoluteFillObject,
     width: "100%",
-    height: "80%",
+    height: "60%",
   },
   bottomCard: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    height: "30%",
+    height: "40%",
     backgroundColor: "#1A1A1A",
     padding: 24,
     borderTopLeftRadius: 28,
@@ -84,7 +90,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonSolid: {
-    backgroundColor: "#00BFA6",
+    backgroundColor: "#2563eb",
     paddingVertical: 14,
     borderRadius: 20,
     flexDirection: "row",

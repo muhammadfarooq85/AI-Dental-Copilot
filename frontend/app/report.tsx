@@ -9,90 +9,122 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-// Local Imports
-import { nearbyDoctors } from "../data/data";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ReportScreen() {
-  const reportSummary =
-    "Based on the analysis of your oral health inputs, we’ve detected minor risk factors. We recommend consulting a dental professional for a detailed checkup.";
-
   const router = useRouter();
+  const params = useLocalSearchParams();
+
+  const analysisData = params.questionnaireResult
+    ? JSON.parse(params.questionnaireResult as string)
+    : null;
+  const imageData = params.imageResult
+    ? JSON.parse(params.imageResult as string)
+    : null;
+
+  if (!analysisData || !imageData) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.cardCentered}>
+          <Text style={styles.cardTitle}>⚠️ No Report Available</Text>
+          <Text style={styles.cardText}>
+            No report data found. Please try again.
+          </Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Animatable.View
-        animation="fadeInDown"
-        duration={1000}
-        style={styles.header}
-      >
-        <Text style={styles.title}>Your Report</Text>
-        <View style={styles.divider} />
-      </Animatable.View>
-      <Animatable.View
-        animation="fadeInUp"
-        delay={200}
-        duration={1000}
-        style={styles.card}
-      >
-        <Text style={styles.cardTitle}>Summary</Text>
-        <Text style={styles.cardText}>{reportSummary}</Text>
-      </Animatable.View>
-      <Animatable.View
-        animation="fadeInUp"
-        delay={600}
-        duration={1000}
-        style={styles.card}
-      >
-        <Text style={styles.cardTitle}>Nearby Dentists</Text>
-        {nearbyDoctors.map((doc, index) => (
-          <View key={index} style={styles.doctorBox}>
-            <Ionicons name="person-circle" size={28} color="#00BFA6" />
-            <View style={{ flex: 1, marginLeft: 10 }}>
-              <Text style={styles.doctorName}>{doc.name}</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Ionicons
-                  name="location-outline"
-                  size={14}
-                  color="rgba(255,255,255,0.7)"
-                />
-                <Text style={styles.doctorAddress}>{doc.address}</Text>
-              </View>
-            </View>
-          </View>
-        ))}
-      </Animatable.View>
-      <Animatable.View
-        animation="fadeInUp"
-        delay={800}
-        duration={1000}
-        style={styles.buttonRow}
-      >
-        <TouchableOpacity
-          style={[styles.button, styles.secondaryBtn]}
-          onPress={() => router.navigate("/")}
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Animatable.View
+          animation="fadeInDown"
+          duration={1000}
+          style={styles.header}
         >
-          <Ionicons name="home" size={20} color="#00BFA6" />
-          <Text style={styles.secondaryText}>Go Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.navigate("/details")}
+          <Text style={styles.title}>Your Oral Health Report</Text>
+          <View style={styles.divider} />
+        </Animatable.View>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={100}
+          duration={800}
+          style={styles.card}
         >
-          <Text style={styles.buttonText}>Download</Text>
-          <Ionicons name="download" size={20} color="#fff" />
-        </TouchableOpacity>
-      </Animatable.View>
-    </ScrollView>
+          <Text style={styles.cardTitle}>AI Prediction</Text>
+          <Text style={styles.cardText}>
+            {imageData.prediction} {"\n"}
+            Confidence: {(imageData.confidence * 100).toFixed(1)}%
+          </Text>
+          <Text style={styles.riskBadge}>
+            Risk Level: {imageData.risk_level}
+          </Text>
+        </Animatable.View>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={300}
+          duration={800}
+          style={styles.card}
+        >
+          <Text style={styles.cardTitle}>Patient Questionnaire</Text>
+          <Text style={styles.cardText}>{analysisData.summary_paragraph}</Text>
+        </Animatable.View>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={500}
+          duration={800}
+          style={styles.card}
+        >
+          <Text style={styles.cardTitle}>Recommendations</Text>
+          {imageData.recommendations.map((rec: string, i: number) => (
+            <Text key={i} style={styles.listItem}>
+              • {rec}
+            </Text>
+          ))}
+          {analysisData.recommendations.map((rec: string, i: number) => (
+            <Text key={`q-${i}`} style={styles.listItem}>
+              • {rec}
+            </Text>
+          ))}
+        </Animatable.View>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={700}
+          duration={800}
+          style={styles.card}
+        >
+          <Text style={styles.cardTitle}>Next Steps</Text>
+          {analysisData.next_steps.map((step: string, i: number) => (
+            <Text key={i} style={styles.listItem}>
+              → {step}
+            </Text>
+          ))}
+        </Animatable.View>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.navigate("/dentist")}
+          >
+            <Text style={styles.buttonText}>Find Dentists</Text>
+            <Ionicons name="search" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 // Styling
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#0d0d0d",
+  },
+  scrollContent: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: "#121212",
   },
   header: {
     alignItems: "center",
@@ -108,7 +140,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 3,
     width: 80,
-    backgroundColor: "#00BFA6",
+    backgroundColor: "#2563eb",
     borderRadius: 2,
   },
   card: {
@@ -123,45 +155,40 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
     marginBottom: 12,
+    fontFamily: "SpaceGrotesk-Medium",
   },
   cardText: {
     fontSize: 17,
     color: "rgba(255,255,255,0.8)",
-    lineHeight: 20,
+    lineHeight: 22,
+    marginBottom: 8,
     fontFamily: "SpaceGrotesk-Medium",
-    letterSpacing: 0.5,
   },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  doctorBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-  },
-  doctorName: {
+  listItem: {
     fontSize: 17,
-    fontFamily: "SpaceGrotesk-Medium",
-    color: "#fff",
-    marginBottom: 2,
-  },
-  doctorAddress: {
-    fontSize: 13,
     color: "rgba(255,255,255,0.8)",
-    marginLeft: 4,
+    marginBottom: 6,
+    fontFamily: "SpaceGrotesk-Medium",
+  },
+  riskBadge: {
+    marginTop: 10,
+    padding: 8,
+    backgroundColor: "#2563eb",
+    color: "#ffffffff",
+    borderRadius: 8,
+    fontSize: 20,
+    fontFamily: "SpaceGrotesk-Medium",
+    textAlign: "center",
   },
   buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: 20,
     marginTop: 10,
   },
   button: {
     flex: 1,
-    backgroundColor: "#00BFA6",
+    backgroundColor: "#2563eb",
     borderRadius: 20,
     paddingVertical: 14,
     flexDirection: "row",
@@ -171,20 +198,19 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontWeight: "600",
     fontSize: 25,
     fontFamily: "SpaceGrotesk-Medium",
     marginRight: 8,
   },
-  secondaryBtn: {
-    backgroundColor: "transparent",
+  cardCentered: {
+    flex: 0.1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.05)",
+    margin: 20,
+    borderRadius: 16,
+    padding: 24,
     borderWidth: 1,
-    borderColor: "#00BFA6",
-  },
-  secondaryText: {
-    color: "#00BFA6",
-    fontSize: 25,
-    fontFamily: "SpaceGrotesk-Medium",
-    marginLeft: 8,
+    borderColor: "rgba(255,255,255,0.1)",
   },
 });

@@ -1,50 +1,93 @@
-# Welcome to your Expo app 👋
+## Features
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+- AI-Powered Analysis: Upload dental images for instant AI analysis
+- Symptom Assessment: Input your symptoms for personalized recommendations
+- Professional Insights: Get guidance on whether to seek professional care
+- User-Friendly Interface: Intuitive design with dark theme for comfortable use
+- Secure Data Handling: Your health information remains private and secure
 
-## Get started
+# Screens
 
-1. Install dependencies
+## Home Screen
 
-   ```bash
-   npm install
-   ```
+### The welcoming interface with a clear call-to-action to begin your dental health assessment.
 
-2. Start the app
+![Home Screen](./assets/images/screens/home.png)
 
-   ```bash
-   npx expo start
-   ```
+## About Screen
 
-In the output, you'll find options to open the app in a
+### Learn about our mission, team, and how to use the application effectively.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+![About Screen](./assets/images/screens/about-1.png)
+![About Screen](./assets/images/screens/about-2.png)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+# Details Screen
 
-## Get a fresh project
+### Input your dental concerns, symptoms, and upload relevant images.
 
-When you're ready, run:
+![Details Screen](./assets/images/screens/details-1.png)
+![Details Screen](./assets/images/screens/details-2.png)
 
-```bash
-npm run reset-project
+# Report Screen
+
+### Receive your AI-generated dental health assessment with recommendations.
+
+![Report Screen](./assets/images/screens/report-1.jpeg)
+![Report Screen](./assets/images/screens/report-2.jpeg)
+![Report Screen](./assets/images/screens/report-3.jpeg)
+
+# Dentist Screen
+
+### Find information about professional dental care options and when to seek help.
+
+![Dentist Screen](./assets/images/screens/dentist-1.jpeg)
+![Dentist Screen](./assets/images/screens/dentist-2.jpeg)
+
+# Installation
+
+1. Ensure you have Node.js installed on your system
+2. Clone or download this project
+3. Navigate to the project directory and install dependencies:
+
+```
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+4. Start the development server:
 
-## Learn more
+```
+npx expo start --tunnel
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Running the App
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### After starting the development server, you can run the app on:
 
-## Join the community
+- Expo Go: Scan the QR code with your iOS or Android device using the Expo Go app
+- Android Emulator: Open with Android Studio emulator
+- iOS Simulator: Run on macOS with Xcode simulator
+- Development Build: Use with a prebuilt development client
 
-Join our community of developers creating universal apps.
+## Technology Stack
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Frontend: React Native with Expo
+- Navigation: React Navigation
+- UI Components: React Native core components with custom styling
+- AI Integration: Custom machine learning models for dental image analysis
+
+## Usage
+
+1. Open the app and navigate to the Details screen
+2. Fill in your dental concerns and symptoms
+3. Upload clear images of the area in question
+4. Submit for AI analysis
+5. Review your personalized report and recommendations
+6. Use the information to decide on next steps for your dental care
+
+## Important Notes
+
+- This application provides preliminary assessments only and is not a replacement for professional dental care
+- Always consult with a qualified dentist for official diagnoses and treatment plans
+- Image quality significantly impacts the accuracy of AI analysis
+
+### Disclaimer: AI Dental Copilot is designed to assist with preliminary dental health assessments only. It does not provide medical diagnoses or replace professional dental care. Always consult with a qualified healthcare provider for medical advice.

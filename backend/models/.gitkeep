@@ -1,0 +1,3 @@
+# This file ensures the models directory is tracked in git
+# Place your trained model files here
+# Model files are ignored by .gitignore to keep the repository lightweight

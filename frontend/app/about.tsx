@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
+import { SafeAreaView } from "react-native-safe-area-context";
 // Local Imports
 import { howToUse, ourTechnology, teamMembers } from "../data/data";
 
@@ -17,7 +18,7 @@ export default function AboutScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Animatable.View
           animation="fadeInDown"
@@ -44,7 +45,6 @@ export default function AboutScreen() {
               </View>
               <View style={styles.stepContent}>
                 <Text style={styles.stepTitle}>{step.title}</Text>
-                <Text style={styles.stepDescription}>{step.desc}</Text>
               </View>
             </View>
           ))}
@@ -65,46 +65,44 @@ export default function AboutScreen() {
           <View style={styles.featureList}>
             {ourTechnology.map((feature, index) => (
               <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle" size={20} color="#00BFA6" />
+                <Ionicons name="checkmark-circle" size={20} color="#2563eb" />
                 <Text style={styles.featureText}>{feature}</Text>
               </View>
             ))}
           </View>
         </View>
-      </ScrollView>
-      <Animatable.View
-        animation="fadeInUp"
-        duration={1000}
-        delay={600}
-        style={styles.buttonContainer}
-      >
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.navigate("./details")}
-          activeOpacity={0.85}
+        <Animatable.View
+          animation="fadeInUp"
+          duration={1000}
+          delay={600}
+          style={styles.buttonContainer}
         >
-          <Text style={styles.buttonText}>Fill Your Details</Text>
-          <Ionicons name="document-text" size={22} color="#fff" />
-        </TouchableOpacity>
-      </Animatable.View>
-    </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.navigate("./details")}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.buttonText}>Fill Your Details</Text>
+            <Ionicons name="document-text" size={22} color="#fff" />
+          </TouchableOpacity>
+        </Animatable.View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 // Styling
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: "#0d0d0d",
   },
   scrollContent: {
     padding: 20,
-    paddingBottom: 80,
   },
   header: {
     alignItems: "center",
     marginBottom: 28,
-    marginTop: 20,
   },
   title: {
     fontSize: 30,
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 3,
     width: 70,
-    backgroundColor: "#00BFA6",
+    backgroundColor: "#2563eb",
     borderRadius: 2,
   },
   contentBox: {
@@ -147,13 +145,13 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: "rgba(0,191,166,0.18)",
+    backgroundColor: "#2563eb",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 14,
   },
   stepText: {
-    color: "#00BFA6",
+    color: "#ffffffff",
     fontFamily: "SpaceGrotesk-Medium",
     fontSize: 15,
   },
@@ -162,7 +160,7 @@ const styles = StyleSheet.create({
   },
   stepTitle: {
     fontFamily: "SpaceGrotesk-Medium",
-    fontSize: 20,
+    fontSize: 17,
     color: "#ffffffe4",
     marginBottom: 4,
     letterSpacing: 0.5,
@@ -185,7 +183,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-    marginBottom: 10,
   },
   memberName: {
     fontSize: 15,
@@ -207,13 +204,10 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   buttonContainer: {
-    position: "absolute",
-    bottom: 25,
-    left: 20,
-    right: 20,
+    marginTop: 20,
   },
   button: {
-    backgroundColor: "#00BFA6",
+    backgroundColor: "#2563eb",
     borderRadius: 20,
     paddingVertical: 14,
     flexDirection: "row",

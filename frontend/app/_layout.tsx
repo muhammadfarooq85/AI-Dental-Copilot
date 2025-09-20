@@ -36,7 +36,7 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: true,
           headerStyle: {
-            backgroundColor: "#00BFA6",
+            backgroundColor: "#2563eb",
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
@@ -49,10 +49,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerTitle: "Home" }} />
         <Stack.Screen name="about" options={{ headerTitle: "About" }} />
         <Stack.Screen name="details" options={{ headerTitle: "Details" }} />
-        <Stack.Screen
-          name="report"
-          options={{ headerTitle: "Report & Analysis" }}
-        />
+        <Stack.Screen name="report" options={{ headerTitle: "Report" }} />
+        <Stack.Screen name="dentist" options={{ headerTitle: "Dentists" }} />
       </Stack>
     </ThemeProvider>
   );

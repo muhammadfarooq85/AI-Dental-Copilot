@@ -42,7 +42,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "fresnel-satignon-58a84229b",
     name: "Fresnel Satignon",
-    role: "Product Manager",
+    role: "AI, Computer Vision Student",
     image:
       "https://media.licdn.com/dms/image/v2/D4E03AQFJqasetotc3w/profile-displayphoto-scale_200_200/B4EZh_oDCpGcAc-/0/1754487863894?e=1761177600&v=beta&t=jI3SYWOUi3yRv8Qf_2wEON1GgXLEgcnuKTAZ6805LO4",
   },
@@ -85,6 +85,7 @@ export const ourTechnology: string[] = [
   "Nearest Dentist Matching System",
   "Secure Health Data Processing"
 ];
+
 // Questions
 export const questions: string[] = [
   "Do you have any sores or ulcers in your mouth?",

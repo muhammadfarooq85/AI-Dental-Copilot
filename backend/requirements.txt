@@ -12,8 +12,8 @@ langchain-community==0.3.0
 openai==1.54.0
 google-search-results==2.4.2
 # PyTorch CPU-optimized versions
-# For CPU-only systems, install with: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-# torch>=2.0.0
-# torchvision>=0.15.0
-# timm>=0.9.0
-# psutil>=5.9.0
+--index-url https://download.pytorch.org/whl/cpu
+torch>=2.0.0
+torchvision>=0.15.0
+timm>=0.9.0
+psutil>=5.9.0

@@ -15,6 +15,7 @@ OralDetetcionBakend/
 │   ├── __init__.py
 │   ├── model_service.py      # Image analysis and model inference
 │   ├── questionnaire_service.py  # Questionnaire analysis logic
+│   ├── oral_health_agent.py  # LangChain agent for comprehensive oral health analysis
 │   ├── dentist_service.py       # Dentist search and recommendations
 │   ├── dentist_agent.py        # LangChain agent for intelligent dentist search
 │   ├── serpapi_tool.py         # SerpAPI integration tool
@@ -32,7 +33,7 @@ OralDetetcionBakend/
 ## Features
 
 - **Image Analysis**: Upload images for oral cancer detection using AI models
-- **Questionnaire Analysis**: Risk assessment based on patient responses using LangChain
+- **Questionnaire Analysis**: Comprehensive risk assessment and analysis using LangChain oral health agent
 - **Intelligent Dentist Search**: Find nearby dental specialists using LangChain agents and SerpAPI
 - **Real-time Data**: Live dentist search with ratings, reviews, and contact information
 - **Specialty Filtering**: Search for specific dental specialties (oral surgery, orthodontics, etc.)
@@ -44,21 +45,14 @@ OralDetetcionBakend/
 ### Detection
 
 - `POST /detection/analyze` - Analyze uploaded image
-- `POST /detection/analyze-base64` - Analyze base64 encoded image
-- `GET /detection/model-info` - Get model information
 
 ### Questionnaire
 
 - `POST /questionnaire/analyze` - Analyze questionnaire responses
-- `GET /questionnaire/questions` - Get standard questions
-- `POST /questionnaire/quick-analysis` - Quick risk assessment
 
 ### Dentist
 
 - `POST /dentist/find-dentists` - Find nearby dentists
-- `POST /dentist/recommend-specialist` - Find oral cancer specialists
-- `GET /dentist/specialties` - Get dental specialties
-- `GET /dentist/emergency-contacts` - Get emergency contacts
 
 ## Installation
 
@@ -77,7 +71,6 @@ python main.py
 3. Access the API documentation at:
 
 - Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
 
 ## Configuration
 
@@ -145,6 +138,111 @@ Run the test script to verify the implementation:
 ```bash
 python test_dentist_agent.py
 ```
+
+## Oral Health Agent Implementation
+
+The questionnaire analysis functionality uses a sophisticated LangChain agent (`oral_health_agent.py`) that provides comprehensive oral health assessment and analysis. This agent is the core component used by the questionnaire service for intelligent analysis of patient responses.
+
+### Architecture
+
+The Oral Health Agent consists of four specialized tools that work together to provide comprehensive analysis:
+
+1. **RiskAssessmentTool**: Calculates risk factors and determines overall risk level
+2. **SymptomAnalysisTool**: Analyzes symptoms and their patterns from questionnaire responses
+3. **RecommendationTool**: Generates personalized recommendations based on analysis results
+4. **PatientEducationTool**: Creates detailed educational content about oral health
+
+### Key Features
+
+- **Comprehensive Risk Assessment**: Evaluates 5 key risk factors based on questionnaire responses
+- **Symptom Pattern Analysis**: Categorizes and analyzes symptoms across different categories (visual, pain, functional, systemic)
+- **Personalized Recommendations**: Generates tailored advice including immediate actions, lifestyle changes, and medical follow-up
+- **Patient Education**: Creates detailed, personalized educational content explaining oral health importance and preventive care
+- **Fallback Support**: Includes robust error handling with fallback to direct LLM analysis
+- **Memory Management**: Maintains conversation context for better analysis
+
+### Risk Assessment Logic
+
+The agent evaluates responses to 5 critical questions:
+
+1. Sores or ulcers in mouth (q1)
+2. Swelling or redness in mouth (q2)
+3. Unusual pain in mouth (q3)
+4. Changes in inner lining of mouth (q4)
+5. Lumps or thickened areas in mouth or neck (q5)
+
+**Risk Level Calculation:**
+
+- **High Risk**: 3 or more "yes" responses
+- **Medium Risk**: 2 "yes" responses
+- **Low Risk**: 1 or fewer "yes" responses
+
+### Agent Tools
+
+#### RiskAssessmentTool
+
+- Calculates risk factors based on questionnaire responses
+- Maps question IDs to specific risk factors
+- Determines overall risk level (High/Medium/Low)
+- Returns structured risk assessment data
+
+#### SymptomAnalysisTool
+
+- Analyzes symptoms from questionnaire responses
+- Categorizes symptoms into visual, pain, functional, and systemic categories
+- Determines symptom severity (Mild/Moderate/Severe)
+- Identifies concerning symptoms that require immediate attention
+
+#### RecommendationTool
+
+- Generates personalized recommendations based on risk level and symptoms
+- Provides immediate actions, lifestyle changes, and medical follow-up advice
+- Tailors recommendations to specific risk factors and symptoms
+- Includes monitoring and prevention strategies
+
+#### PatientEducationTool
+
+- Creates comprehensive educational content about oral health
+- Generates personalized content based on patient's specific responses
+- Explains risk factors, symptoms, and preventive care
+- Provides clear, patient-friendly language for better understanding
+
+### Usage in Questionnaire Service
+
+The `QuestionnaireService` uses the Oral Health Agent as its primary analysis engine:
+
+```python
+# Initialize with agent enabled (default)
+questionnaire_service = QuestionnaireService(use_agent=True)
+
+# Analyze questionnaire responses
+result = questionnaire_service.analyze_questionnaire(answers, patient_info)
+```
+
+### Configuration
+
+The agent requires the following environment variables:
+
+- `AIMLAPI_KEY`: Required for LLM functionality
+- `AIMLAPI_BASE_URL`: Optional, defaults to "https://api.aimlapi.com/v1"
+
+### Error Handling
+
+The agent includes robust error handling:
+
+- **Agent Fallback**: Falls back to direct LLM analysis if agent fails
+- **Tool Fallback**: Individual tools have error handling with graceful degradation
+- **Response Validation**: Validates and sanitizes all responses
+- **Logging**: Comprehensive logging for debugging and monitoring
+
+### Integration with Questionnaire Service
+
+The questionnaire service automatically uses the oral health agent when `use_agent=True` (default). The service handles:
+
+- Input validation and formatting
+- Agent invocation and response parsing
+- Fallback to LLM service if agent fails
+- Response formatting for API consistency
 
 ## Development
 

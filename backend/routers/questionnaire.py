@@ -60,21 +60,3 @@ async def analyze_questionnaire(request: QuestionnaireRequest):
         logger.error(f"Unexpected error in analyze_questionnaire: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error analyzing questionnaire: {str(e)}")
 
-
-# @router.get("/questions")
-# async def get_questionnaire_questions():
-#     """Get the standard questionnaire questions"""
-#     questions = questionnaire_service.get_questions()
-#     return {"questions": questions}
-
-
-# @router.post("/quick-analysis")
-# async def quick_analysis(request: QuestionnaireRequest):
-#     """Quick analysis without full processing"""
-#     try:
-#         answers_dict = [answer.dict() for answer in request.answers]
-#         result = questionnaire_service.quick_analysis(answers_dict)
-#         return result
-        
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=f"Error in quick analysis: {str(e)}")

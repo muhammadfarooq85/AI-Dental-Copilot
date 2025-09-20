@@ -33,36 +33,3 @@ async def find_dentists(request: LocationRequest):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error finding dentists: {str(e)}")
-
-
-# @router.post("/recommend-specialist")
-# async def recommend_specialist(request: LocationRequest):
-#     """Recommend oral cancer specialists specifically"""
-#     try:
-#         result = dentist_service.find_dentists(
-#             address=request.address,
-#             city=request.city,
-#             state=request.state,
-#             country=request.country,
-#             radius_km=request.radius_km,
-#             specialty="oral cancer specialist"
-#         )
-        
-#         return result
-        
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=f"Error finding specialists: {str(e)}")
-
-
-# @router.get("/specialties")
-# async def get_dental_specialties():
-#     """Get list of dental specialties"""
-#     specialties = dentist_service.get_specialties()
-#     return {"specialties": specialties}
-
-
-# @router.get("/emergency-contacts")
-# async def get_emergency_contacts():
-#     """Get emergency dental contacts"""
-#     emergency_info = dentist_service.get_emergency_contacts()
-#     return emergency_info

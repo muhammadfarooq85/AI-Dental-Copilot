@@ -15,22 +15,12 @@ app = FastAPI(
     title=settings.API_TITLE,
     description=settings.API_DESCRIPTION,
     version=settings.API_VERSION,
-    # docs_url=settings.DOCS_URL,
-    # redoc_url=settings.REDOC_URL
 )
 
 logger.info(f"Starting {settings.API_TITLE} v{settings.API_VERSION}")
 logger.info(f"Log level: {settings.LOG_LEVEL}")
 logger.info(f"Using agent: {settings.USE_AGENT}")
 
-# CORS middleware
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=settings.ALLOWED_ORIGINS,
-#     allow_credentials=settings.ALLOW_CREDENTIALS,
-#     allow_methods=settings.ALLOWED_METHODS,
-#     allow_headers=settings.ALLOWED_HEADERS,
-# )
 
 app.add_middleware(
     CORSMiddleware,
@@ -56,7 +46,6 @@ async def root():
             "detection": "/detection",
             "questionnaire": "/questionnaire", 
             "dentist": "/dentist",
-            # "docs": settings.DOCS_URL
         }
     }
 
@@ -69,8 +58,4 @@ async def health_check():
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        # host=settings.HOST,
-        # port=settings.PORT,
-        # reload=settings.RELOAD,
-        # log_level=settings.LOG_LEVEL
     )

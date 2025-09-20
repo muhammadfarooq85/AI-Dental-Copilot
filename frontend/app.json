@@ -22,16 +22,27 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.muhammadfarooq.aidentalcopilot"
     },
     "web": {
       "output": "static",
       "favicon": "./assets/images/icon.png"
     },
-    "plugins": ["expo-router", "expo-font"],
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7cafac00-e3df-48a3-b023-a1eee8871424"
+      }
+    },
+    "owner": "muhammad-farooq"
   }
 }

@@ -49,7 +49,7 @@ export default function FindDentistsScreen() {
             try {
               setLoading(true);
               const res = await axios.post(
-                "http://192.168.43.141:8000/dentist/find-dentists",
+                "https://ai-dental-copilot.onrender.com/dentist/find-dentists",
                 {
                   ...values,
                   radius_km: Number(values.radius_km),

@@ -112,7 +112,7 @@ export default function DetailsScreen() {
 
                   // Upload to server
                   const imageRes = await axios.post(
-                    "http://192.168.43.141:8000/detection/analyze",
+                    "https://ai-dental-copilot.onrender.com/detection/analyze",
                     formData,
                     {
                       headers: {
@@ -154,7 +154,7 @@ export default function DetailsScreen() {
               };
               setLoading(true);
               const qRes = await axios.post(
-                "http://192.168.43.141:8000/questionnaire/analyze",
+                "https://ai-dental-copilot.onrender.com/questionnaire/analyze",
                 questionnairePayload,
                 { headers: { "Content-Type": "application/json" } }
               );

@@ -1,10 +1,10 @@
-# 🦷 Oral Health Assistant --- Backend Setup Guide
+# 🦷 AI Dental Copilot --- Backend Setup Guide
 
 ## ⚙️ Getting Started (Setup Instructions)
 
 ### 1. Clone the Repository
 
-``` bash
+```bash
 git clone <your-repo-url>
 cd <your-repo-folder>
 ```
@@ -13,48 +13,48 @@ cd <your-repo-folder>
 
 **On Windows**
 
-``` bash
+```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
 **On macOS/Linux**
 
-``` bash
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
 
-``` bash
+```bash
 pip install -r requirements.txt
 ```
 
 ### 4. Install CPU Version of PyTorch
 
-``` bash
+```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 
 ### 5. Add Environment Variables
 
--   Place the provided `.env` file in the root directory of the project.
+- Place the provided `.env` file in the root directory of the project.
 
 ### 6. Add Model File
 
--   Place the provided `.pth` model file inside the `models/` folder
-    (create it if it doesn't exist).
+- Place the provided `.pth` model file inside the `models/` folder
+  (create it if it doesn't exist).
 
 ### 7. Run the Server
 
-``` bash
+```bash
 python main.py
 ```
 
 > The backend will start on: **http://localhost:8000**
 
-------------------------------------------------------------------------
+---
 
 ## 🚀 API Endpoints
 
@@ -69,7 +69,7 @@ analyze
 
 **Output** - Inference results (detection output)
 
-------------------------------------------------------------------------
+---
 
 ### 📋 2. Questionnaire Analysis
 
@@ -79,7 +79,7 @@ analyze
 
 **Example Request**
 
-``` json
+```json
 {
   "patient_info": {
     "name": "John Doe",
@@ -120,7 +120,7 @@ analyze
 
 **Output** - Risk assessment or diagnostic suggestions
 
-------------------------------------------------------------------------
+---
 
 ### 🦷 3. Find Nearby Dentists
 
@@ -130,7 +130,7 @@ analyze
 
 **Example Request**
 
-``` json
+```json
 {
   "address": "123 street",
   "city": "New York",
@@ -142,11 +142,11 @@ analyze
 
 **Output** - List of nearby dentists within the given radius
 
-------------------------------------------------------------------------
+---
 
 ## 📝 Notes
 
--   Make sure Python (\>=3.9) is installed.
--   Use the provided `.env` and `.pth` files as they are crucial for the
-    backend to work.
--   The backend runs by default on port `8000`.
+- Make sure Python (\>=3.9) is installed.
+- Use the provided `.env` and `.pth` files as they are crucial for the
+  backend to work.
+- The backend runs by default on port `8000`.

@@ -1,4 +1,4 @@
-# Oral Cancer Detection Backend
+# AI Dental Copilot Backend
 
 A FastAPI-based backend service for oral cancer detection, questionnaire analysis, and intelligent dentist recommendations using LangChain agents and SerpAPI.
 
